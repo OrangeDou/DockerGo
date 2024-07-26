@@ -24,7 +24,9 @@ func main() {
 	app.Name = "Orangedocker"
 	app.Usage = usage
 
-	app.Commands = []cli.Command{}
+	app.Commands = []cli.Command{
+		runCommand,
+	}
 	// 命令执行前进行初始化操作
 	app.Before = func(context *cli.Context) error {
 		// 设置日志的输出格式为 JSON
