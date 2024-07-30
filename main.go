@@ -1,9 +1,9 @@
 package main
 
 import (
+	"log"
 	"os"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 
@@ -27,14 +27,6 @@ func main() {
 	app.Commands = []cli.Command{
 		initCommand,
 		runCommand,
-	}
-	// 命令执行前进行初始化操作
-	app.Before = func(context *cli.Context) error {
-		// 设置日志的输出格式为 JSON
-		log.SetFormatter(&log.JSONFormatter{})
-		// 将日志输出到标准输出（通常是终端）
-		log.SetOutput(os.Stdout)
-		return nil
 	}
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)

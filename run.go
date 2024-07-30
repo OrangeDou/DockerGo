@@ -4,15 +4,15 @@ import (
 	"dockergo/container"
 	"os"
 
-	log "github.com/sirupsen/logrus"
+	"log"
 )
 
 func Run(tty bool, command string) {
 	parent := container.NewParentProcess(tty, command)
 	if err := parent.Start(); err != nil {
-		log.Error(err)
+		log.Fatal(err)
 	}
-	// 等待command结束
+	// 等待command 结束
 	parent.Wait()
 	os.Exit(-1)
 }

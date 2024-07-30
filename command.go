@@ -5,7 +5,7 @@ import (
 
 	"dockergo/container"
 
-	log "github.com/sirupsen/logrus"
+	"log"
 
 	"github.com/urfave/cli"
 )
@@ -38,9 +38,9 @@ var initCommand = cli.Command{
 
 	// 获取command参数初始化
 	Action: func(context *cli.Context) error {
-		log.Infof("init come on")
+		log.Print("init come on")
 		cmd := context.Args().Get(0)
-		log.Infof("command %s", cmd)
+		log.Print("command %s", cmd)
 		err := container.RunContainerInitProcess(cmd, nil)
 		return err
 	},
