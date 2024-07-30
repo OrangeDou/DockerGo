@@ -5,7 +5,7 @@ import (
 
 	"gocker/container"
 
-	"log"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/urfave/cli"
 )
@@ -38,9 +38,9 @@ var initCommand = cli.Command{
 
 	// 获取command参数初始化
 	Action: func(context *cli.Context) error {
-		log.Print("init come on")
+		log.Info("init come on")
 		cmd := context.Args().Get(0)
-		log.Print("command %s", cmd)
+		log.Info("command %s", cmd)
 		err := container.RunContainerInitProcess(cmd, nil)
 		return err
 	},
