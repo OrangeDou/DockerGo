@@ -1,7 +1,7 @@
 package main
 
 import (
-	"dockergo/container"
+	"gocker/container"
 	"os"
 
 	"log"

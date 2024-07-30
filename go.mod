@@ -1,4 +1,4 @@
-module dockergo
+module gocker
 
 go 1.19
 
