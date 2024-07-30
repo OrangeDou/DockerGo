@@ -25,6 +25,7 @@ func main() {
 	app.Usage = usage
 
 	app.Commands = []cli.Command{
+		initCommand,
 		runCommand,
 	}
 	// 命令执行前进行初始化操作
