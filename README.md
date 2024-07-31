@@ -12,4 +12,7 @@
 
 ### 实现 Run 命令
 
-类似~ docker run -ti [cmmand]
+docker run -ti [cmmand]
+(需在linux系统运行，并已执行mount -t proc proc /proc)
+
+### 增加容器资源限制
