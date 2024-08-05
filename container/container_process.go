@@ -12,7 +12,7 @@ var SysProcAttr syscall.SysProcAttr
 
 // 此处是父进程
 func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
-	_, writePipe, err := NewPipe()
+	readPipe, writePipe, err := NewPipe()
 	if err != nil {
 		log.Errorf("New pipe error %v", err)
 		return nil, nil
@@ -35,7 +35,7 @@ func NewParentProcess(tty bool) (*exec.Cmd, *os.File) {
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
 	}
-	//cmd.ExtraFiles = []*os.File{readPipe}
+	cmd.ExtraFiles = []*os.File{readPipe}
 
 	return cmd, writePipe
 }
