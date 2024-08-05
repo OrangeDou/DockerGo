@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"gocker/cgroups/subsystems"
 	"gocker/container"
 
 	log "github.com/sirupsen/logrus"
@@ -24,9 +25,17 @@ var runCommand = cli.Command{
 		if len(context.Args()) < 1 {
 			return fmt.Errorf("Missing container command")
 		}
-		cmd := context.Args().Get(0)
+		var cmdArray []string
+		for _, arg := range context.Args() {
+			cmdArray = append(cmdArray, arg)
+		}
+		resConf := &subsystems.ResourceConfig{
+			MemoryLimit: context.String("m"),
+			CpuSet:      context.String("cpuset"),
+			CpuShare:    context.String("cpushare"),
+		}
 		tty := context.Bool("ti")
-		Run(tty, cmd)
+		Run(tty, cmdArray, resConf)
 		return nil
 	},
 }
