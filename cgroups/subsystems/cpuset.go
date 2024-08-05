@@ -10,6 +10,7 @@ import (
 type CpusetSubSystem struct {
 }
 
+// 将特定的 CPU 设置写入到 cgroups（控制组）的 cpuset.cpus 文件
 func (s *CpusetSubSystem) Set(cgroupPath string, res *ResourceConfig) error {
 	if subsysCgroupPath, err := GetCgroupPath(s.Name(), cgroupPath, true); err == nil {
 		if res.CpuSet != "" {

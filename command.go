@@ -16,8 +16,27 @@ var runCommand = cli.Command{
 	Usage: `Create a container with namespace and cgroups limit ie: mydocker run -ti [image] [command]`,
 	Flags: []cli.Flag{
 		cli.BoolFlag{
+			// 交互式终端
 			Name:  "ti",
 			Usage: "enable tty",
+		},
+		cli.BoolFlag{
+			Name:  "d",
+			Usage: "detach container",
+		},
+		// 内存限制
+		cli.StringFlag{
+			Name:  "m",
+			Usage: "memory limit",
+		},
+		// CPU权重
+		cli.StringFlag{
+			Name:  "cpushare",
+			Usage: "cpushare limit",
+		},
+		cli.StringFlag{
+			Name:  "cpuset",
+			Usage: "cpuset limit",
 		},
 	},
 	// run function
