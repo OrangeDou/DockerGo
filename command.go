@@ -67,9 +67,7 @@ var initCommand = cli.Command{
 	// 获取command参数初始化
 	Action: func(context *cli.Context) error {
 		log.Info("init come on")
-		cmd := context.Args().Get(0)
-		log.Info("command %s", cmd)
-		err := container.RunContainerInitProcess(cmd, nil)
+		err := container.RunContainerInitProcess()
 		return err
 	},
 }

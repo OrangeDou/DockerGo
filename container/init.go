@@ -24,7 +24,7 @@ import (
 
 *
 */
-func RunContainerInitProcess(command string, args []string) error {
+func RunContainerInitProcess() error {
 	cmdArray := readUserCommand()
 	if cmdArray == nil || len(cmdArray) == 0 {
 		return fmt.Errorf("Run container get user command error, cmdArray is nil")
@@ -38,7 +38,7 @@ func RunContainerInitProcess(command string, args []string) error {
 	}
 	log.Infof("Find path %s", path)
 
-	if err := syscall.Exec(command, cmdArray[0:], os.Environ()); err != nil {
+	if err := syscall.Exec(path, cmdArray[0:], os.Environ()); err != nil {
 		logrus.Errorf(err.Error())
 	}
 	return nil
