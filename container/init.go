@@ -8,8 +8,9 @@ import (
 	"strings"
 	"syscall"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/sirupsen/logrus"
-	"google.golang.org/appengine/log"
 )
 
 /*
