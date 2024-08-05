@@ -27,3 +27,7 @@ docker run -ti -m 100m -cpuset 1 -cpushare 512 /bin/sh
     将每个容器作为一个 subsystem，包含四个接口，实现 subsystem 的 Cgroup 资源限制，
 
 在/sys/fs/cgroup/memory 中创建文件夹对应创建的 cgroup，就可以做内存限制。（实际上是在创建一个新的 cgroup，这个 cgroup 可以用来限制和监控一组进程的内存使用），创建 cgroup 后，就可以将进程添加到这个 cgroup 中，通常通过写入 cgroup.procs 文件来实现。一旦进程被添加到 cgroup，它将受到该 cgroup 设置的内存限制。该部分是通过将容器进程移动到 subsystem 创建的 cgroup 中进行资源限制。
+
+### 3.增加进程间通信的管道机制
+
+    从本质上说，管道是文件的一种，它和文件通信的区别在于，管道内有一个固定大小的缓冲区，一般是4k，会阻塞IO。
