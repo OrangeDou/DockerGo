@@ -38,6 +38,11 @@ var runCommand = cli.Command{
 			Name:  "cpuset",
 			Usage: "cpuset limit",
 		},
+		// 容器名
+		cli.StringFlag{
+			Name:  "name",
+			Usage: "container name",
+		},
 	},
 	// run function
 	Action: func(context *cli.Context) error {
@@ -48,13 +53,20 @@ var runCommand = cli.Command{
 		for _, arg := range context.Args() {
 			cmdArray = append(cmdArray, arg)
 		}
+
+		//get image name
+		imageName := cmdArray[0]
+		cmdArray = cmdArray[1:]
+
 		resConf := &subsystems.ResourceConfig{
 			MemoryLimit: context.String("m"),
 			CpuSet:      context.String("cpuset"),
 			CpuShare:    context.String("cpushare"),
 		}
 		tty := context.Bool("ti")
-		Run(tty, cmdArray, resConf)
+		containerName := context.String("name")
+		volume := context.String("v")
+		Run(tty, cmdArray, resConf, containerName, volume, imageName)
 		return nil
 	},
 }
@@ -69,5 +81,14 @@ var initCommand = cli.Command{
 		log.Info("init come on")
 		err := container.RunContainerInitProcess()
 		return err
+	},
+}
+
+var listCommand = cli.Command{
+	Name:  "ps",
+	Usage: "list all containers",
+	Action: func(context *cli.Context) error {
+		container.ListContainers()
+		return nil
 	},
 }
