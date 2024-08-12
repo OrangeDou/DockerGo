@@ -28,6 +28,7 @@ func main() {
 		initCommand,
 		runCommand,
 		listCommand,
+		execCommand,
 	}
 	// 命令执行前进行初始化操作
 	app.Before = func(context *cli.Context) error {
