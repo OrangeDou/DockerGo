@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"gocker/cgroups/subsystems"
 	"gocker/container"
@@ -89,6 +90,29 @@ var listCommand = cli.Command{
 	Usage: "list all containers",
 	Action: func(context *cli.Context) error {
 		container.ListContainers()
+		return nil
+	},
+}
+
+var execCommand = cli.Command{
+	Name:  "exec",
+	Usage: "exec a command into container",
+	Action: func(context *cli.Context) error {
+		//This is for callback
+		if os.Getenv(ENV_EXEC_PID) != "" {
+			log.Infof("pid callback pid %s", os.Getgid())
+			return nil
+		}
+
+		if len(context.Args()) < 2 {
+			return fmt.Errorf("Missing container name or command")
+		}
+		containerName := context.Args().Get(0)
+		var commandArray []string
+		for _, arg := range context.Args().Tail() {
+			commandArray = append(commandArray, arg)
+		}
+		ExecContainer(containerName, commandArray)
 		return nil
 	},
 }
