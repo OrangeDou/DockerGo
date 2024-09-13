@@ -1,6 +1,6 @@
 # DockerGo
 
-使用 go 手写 docker
+使用 go 手写 docker(Linux 才能跑！Linux 才能跑！Linux 才能跑！)不是跨平台不想做，go 实现跨平台还是不如 c，太多系统调用无法实现了。
 
 ## Introduce
 
